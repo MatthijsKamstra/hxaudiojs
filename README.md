@@ -1,10 +1,24 @@
 # HxAudio.js
 
 
-__hxaudio.js is a drop-in javascript library that allows HTML5’s `<audio>` tag to be used anywhere.__
+__hxaudio.js is a drop-in javascript library that allows HTML5’s `<audio>` tag to look the same in any browser.__
+
+
+Native AudioElement Google Chrome  
+![Audio Google Chrome](bin/img/audio_chrome.png)
+
+Native AudioElement Firefox  
+![Audio Firefox](bin/img/audio_firefox.png)
+
+Native AudioElement Safari  
+![Audio Safari](bin/img/audio_safari.png)
 
 
 It uses native `<audio>`. It provides a consistent html player UI to all browsers which can be styled used standard css.
+
+Native AudioElement styled by HxAudio.js  
+![Audio Safari](bin/img/audio_hxaudiojs.png)
+
 
 
 ## Inspired by audio.js
@@ -14,7 +28,7 @@ But after a closer look it could use an update:
 
 - no need for flash anymore ([support of audio element](http://caniuse.com/#feat=audio))
 - using flat design (make css simpler)
-- no need for a initialize script (wait for DOM an just do it)
+- no need for a initialize script (wait for DOM and just do it)
 - use [Haxe](http://www.haxe.org) (Haxe is awesome! One codebase, many targets, no platform specific code.)
 - it hasn't been touched in 2 years
 
@@ -59,10 +73,10 @@ It has been verified to work across:
 ###Source code
 All efforts have been made to keep the source as clean and readable as possible. Until we release more detailed documentation, the annotated source is the best reference for usage.
 
-Annotated source / Source on Github
+[Annotated source](https://github.com/MatthijsKamstra/hxaudiojs/blob/master/src/Main.hx) / [Source](http://matthijskamstra.github.io/hxaudiojs/) on Github
 
 ###License
-hxaudio.js is released under an MIT License, so do with it what you will.
+hxaudio.js is released under an [MIT License](https://github.com/MatthijsKamstra/hxaudiojs/blob/master/LICENSE), so do with it what you will.
 
 
 ###Build from source
@@ -75,15 +89,13 @@ npm install
 npm run watch
 ```
 
-open `index.html` from the `/bin/` - folder 
-
-
 or just build it once with
 
 ```
 haxe javascript.hxml
 ```
 
+And open `/bin/index.html` in your favorite browser. 
 
 
 
