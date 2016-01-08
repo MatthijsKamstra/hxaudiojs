@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Hx Audio</title>
+	<title>HxAudio.js</title>
 	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -16,16 +16,92 @@
 
 	<div class="container">
 
-		<h1>player</h1>
+		<h1>HxAudio.js</h1>
 
 		<hr>
 
-		<audio src="01. Strobe - Radio Edit.mp3" preload="auto" ></audio>
+		<audio src="audio/01. Strobe - Radio Edit.mp3" preload="auto" ></audio>
+
+
+<hr>
+
+<h1 id="toc_0">hxaudio.js</h1>
+
+<p><strong>hxaudio.js is a drop-in javascript library that allows HTML5’s <code>&lt;audio&gt;</code> tag to be used anywhere.</strong></p>
+
+<p>It uses native <code>&lt;audio&gt;</code>. It provides a consistent html player UI to all browsers which can be styled used standard css.</p>
+
+
+<h2 id="toc_6">Inspired by audio.js</h2>
+
+<p>I was inspired by the works of Anthony Kolber: <a href="http://kolber.github.io/audiojs/">audio.js</a>.<br>
+But after a closer look it could use an update:</p>
+
+<ul>
+<li>no need for flash anymore (<a href="http://caniuse.com/#feat=audio">support of audio element</a>)</li>
+<li>using flat design (make css simpler)</li>
+<li>no need for a initialize script (wait for DOM an just do it)</li>
+<li>use <a href="http://www.haxe.org">Haxe</a> (Haxe is awesome! One codebase, many targets, no platform specific code.)</li>
+<li>it hasn&rsquo;t been touched in 2 years</li>
+</ul>
+
+
+
+<h3 id="toc_1">Installation</h3>
+
+<ol>
+<li><p>Put <code>hxaudio.js</code> and <code>player-graphics.gif</code> in the same folder.</p></li>
+<li><p>Include the audio.js file:</p></li>
+</ol>
+
+<pre><code class="language-none">&lt;script src=&quot;/hxaudiojs/hxaudio.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+<ol>
+<li>Then you can use <code>&lt;audio&gt;</code> wherever you like in your HTML:</li>
+</ol>
+
+<pre><code class="language-none">&lt;audio src=&quot;/mp3/juicy.mp3&quot; preload=&quot;auto&quot; /&gt;</code></pre>
+
+<h3 id="toc_2">Examples</h3>
+
+<p>A series of API tests &amp; examples for using and extending audio.js</p>
+
+<ul>
+<li>Example: <a href="http://matthijskamstra.github.io/hxaudiojs/example01.html">Multiple players, testing preload, loop &amp; autoplay attributes</a></li>
+</ul>
+
+<h3 id="toc_3">Browser &amp; format support</h3>
+
+<p>It has been verified to work across:</p>
+
+<ul>
+<li>Safari</li>
+<li>Chrome</li>
+<li>Firefox</li>
+</ul>
+
+<h3 id="toc_4">Source code</h3>
+
+<p>All efforts have been made to keep the source as clean and readable as possible. Until we release more detailed documentation, the annotated source is the best reference for usage.</p>
+
+<p>Annotated source / Source on Github</p>
+
+<h3 id="toc_5">License</h3>
+
+<p>hxaudio.js is released under an MIT License, so do with it what you will.</p>
+
+
+
+
+
+
 
 	</div>
 
+
+
 	<!-- Code generated using Haxe -->
-	<script type="text/javascript" src="hxaudio.js"></script>
+	<script type="text/javascript" src="hxaudiojs/hxaudio.js"></script>
 
 	<!-- livereload -->
 	<script src="http://0.0.0.0:35729/livereload.js" type="text/javascript"></script>

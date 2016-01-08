@@ -1,10 +1,10 @@
 .hxaudiojs audio { position: absolute; left: -1px; } 
 .hxaudiojs { width: 470px; height: 40px; background: #1D3037; overflow: hidden; font-family: monospace; font-size: 12px; } 
 .hxaudiojs .play-pause { width: 40px; height: 40px; padding: 4px 6px; margin: 0px; float: left; overflow: hidden; cursor: pointer;} 
-.hxaudiojs .play-pause, .hxaudiojs .play-pause.play  {  background: #1F2226 url("audiojs/player-graphics.gif") 5px 5px no-repeat;}
-.hxaudiojs .play-pause.pause{ background: #1F2226 url("audiojs/player-graphics.gif") 5px -85px no-repeat;}
-.hxaudiojs .play-pause.loading{ background: #1F2226 url("audiojs/player-graphics.gif") 5px -31px no-repeat;}
-.hxaudiojs .play-pause.error{ background: #1F2226 url("audiojs/player-graphics.gif") 5px -61px no-repeat;}
+.hxaudiojs .play-pause, .hxaudiojs .play-pause.play  {  background: #1F2226 url("hxaudiojs/hxaudio.gif") 5px 5px no-repeat;}
+.hxaudiojs .play-pause.pause{ background: #1F2226 url("hxaudiojs/hxaudio.gif") 5px -85px no-repeat;}
+.hxaudiojs .play-pause.loading{ background: #1F2226 url("hxaudiojs/hxaudio.gif") 5px -31px no-repeat;}
+.hxaudiojs .play-pause.error{ background: #1F2226 url("hxaudiojs/hxaudio.gif") 5px -61px no-repeat;}
 
 .hxaudiojs .scrubber { position: relative; float: left; width: 300px; background: #1F2226; height: 10px; margin: 15px; border-radius: 5px; cursor: pointer;} 
 .hxaudiojs .progress { position: absolute; top: 0px; left: 0px; height: 10px; width: 0px; background: #ccc; z-index: 1;  border-radius: 5px;}

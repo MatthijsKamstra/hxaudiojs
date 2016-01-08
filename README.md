@@ -1,6 +1,5 @@
-# hxaudio.js
+# HxAudio.js
 
-A javascript wrapper for the html5 `<audio>` tag http://matthijskamstra.github.com/hxaudiojs
 
 __hxaudio.js is a drop-in javascript library that allows HTML5’s `<audio>` tag to be used anywhere.__
 
@@ -8,11 +7,28 @@ __hxaudio.js is a drop-in javascript library that allows HTML5’s `<audio>` tag
 It uses native `<audio>`. It provides a consistent html player UI to all browsers which can be styled used standard css.
 
 
+## Inspired by audio.js
+
+I was inspired by the works of Anthony Kolber: [audio.js](http://kolber.github.io/audiojs/).  
+But after a closer look it could use an update:
+
+- no need for flash anymore ([support of audio element](http://caniuse.com/#feat=audio))
+- using flat design (make css simpler)
+- no need for a initialize script (wait for DOM an just do it)
+- use [Haxe](http://www.haxe.org) (Haxe is awesome! One codebase, many targets, no platform specific code.)
+- it hasn't been touched in 2 years
+
+
 ###Installation
 
 
-1. Put `hxaudio.js` and `player-graphics.gif` in the same folder.
+1. Put `hxaudio.js` and `hxaudio.gif` in the same folder.
 
+```
+/hxaudiojs
+	/hxadio.js
+	/hxaudio.gif
+```
 3. Include the audio.js file:
 
 ```
@@ -29,7 +45,7 @@ It uses native `<audio>`. It provides a consistent html player UI to all browser
 ###Examples
 A series of API tests & examples for using and extending audio.js
 
-- Example: Multiple players, testing preload, loop & autoplay attributes
+- Example: [Multiple players, testing preload, loop & autoplay attributes](http://matthijskamstra.github.io/hxaudiojs/example01.html)
 
 
 ###Browser & format support
@@ -70,16 +86,5 @@ haxe javascript.hxml
 
 
 
-## Inspired by audio.js
-
-
-I was inspired by the works of Anthony Kolber: [audio.js](http://kolber.github.io/audiojs/).  
-But after a closer look it could use an update:
-
-- no need for flash anymore ([support of audio element](http://caniuse.com/#feat=audio))
-- using flat design (make css simpler)
-- no need for a initialize script (wait for DOM an just do it)
-- use [Haxe](http://www.haxe.org) (Haxe is awesome! One codebase, many targets, no platform specific code.)
-- it hasn't been touched in 2 years
 
 
