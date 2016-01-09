@@ -12,6 +12,8 @@
 #upload it, and it will be always in sync with the compiled .js even if 
 #you modify your .hx files.
 # -D source-map-content
+# 
+-D source-header
 
 #Generate source map and add debug information
 # -debug
@@ -23,3 +25,6 @@
 -dce full
 
 -resource assets/hxaudio.css@style
+
+# zip the bin folder for gh-pages
+-cmd zip -r -X _ghpages.zip bin

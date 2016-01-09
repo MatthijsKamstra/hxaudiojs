@@ -10,7 +10,7 @@
 		"livereload": "^0.3.7"
 	},
 	"scripts": {
-		"watch": "onchange '**/*.hx' '**/*.md' '**/*.css' -v -- haxe javascript.hxml & livereload bin/",
+		"watch": "onchange '**/*.hx' '**/*.md' '**/*.css' '**/*.html' -v -- haxe javascript.hxml & livereload bin/",
 		"prewatch": "haxe javascript.hxml"
 	}
 }
