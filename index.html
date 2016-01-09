@@ -11,6 +11,15 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+	<style type="text/css">
+		body{
+			background-image: url('img/hexellence.png');		
+		}
+		.container {
+			background-color: white;
+		}
+	</style>
+
 </head>
 <body>
 
@@ -25,14 +34,27 @@
 
 <hr>
 
-<h1 id="toc_0">hxaudio.js</h1>
 
-<p><strong>hxaudio.js is a drop-in javascript library that allows HTML5’s <code>&lt;audio&gt;</code> tag to be used anywhere.</strong></p>
+
+<h1 id="toc_0">HxAudio.js</h1>
+
+<p><strong>hxaudio.js is a drop-in javascript library that allows HTML5’s <code>&lt;audio&gt;</code> tag to look the same in any browser.</strong></p>
+
+<p>Native AudioElement Google Chrome<br>
+<img src="img/audio_chrome.png" alt="Audio Google Chrome"></p>
+
+<p>Native AudioElement Firefox<br>
+<img src="img/audio_firefox.png" alt="Audio Firefox"></p>
+
+<p>Native AudioElement Safari<br>
+<img src="img/audio_safari.png" alt="Audio Safari"></p>
 
 <p>It uses native <code>&lt;audio&gt;</code>. It provides a consistent html player UI to all browsers which can be styled used standard css.</p>
 
+<p>Native AudioElement styled by HxAudio.js<br>
+<img src="img/audio_hxaudiojs.png" alt="Audio Safari"></p>
 
-<h2 id="toc_6">Inspired by audio.js</h2>
+<h2 id="toc_1">Inspired by audio.js</h2>
 
 <p>I was inspired by the works of Anthony Kolber: <a href="http://kolber.github.io/audiojs/">audio.js</a>.<br>
 But after a closer look it could use an update:</p>
@@ -40,18 +62,23 @@ But after a closer look it could use an update:</p>
 <ul>
 <li>no need for flash anymore (<a href="http://caniuse.com/#feat=audio">support of audio element</a>)</li>
 <li>using flat design (make css simpler)</li>
-<li>no need for a initialize script (wait for DOM an just do it)</li>
+<li>no need for a initialize script (wait for DOM and just do it)</li>
 <li>use <a href="http://www.haxe.org">Haxe</a> (Haxe is awesome! One codebase, many targets, no platform specific code.)</li>
 <li>it hasn&rsquo;t been touched in 2 years</li>
 </ul>
 
-
-
-<h3 id="toc_1">Installation</h3>
+<h3 id="toc_2">Installation</h3>
 
 <ol>
-<li><p>Put <code>hxaudio.js</code> and <code>player-graphics.gif</code> in the same folder.</p></li>
-<li><p>Include the audio.js file:</p></li>
+<li>Put <code>hxaudio.js</code> and <code>hxaudio.gif</code> in the same folder.</li>
+</ol>
+
+<pre><code class="language-none">/hxaudiojs
+    /hxadio.js
+    /hxaudio.gif</code></pre>
+
+<ol>
+<li>Include the audio.js file:</li>
 </ol>
 
 <pre><code class="language-none">&lt;script src=&quot;/hxaudiojs/hxaudio.js&quot;&gt;&lt;/script&gt;</code></pre>
@@ -62,7 +89,7 @@ But after a closer look it could use an update:</p>
 
 <pre><code class="language-none">&lt;audio src=&quot;/mp3/juicy.mp3&quot; preload=&quot;auto&quot; /&gt;</code></pre>
 
-<h3 id="toc_2">Examples</h3>
+<h3 id="toc_3">Examples</h3>
 
 <p>A series of API tests &amp; examples for using and extending audio.js</p>
 
@@ -70,7 +97,7 @@ But after a closer look it could use an update:</p>
 <li>Example: <a href="http://matthijskamstra.github.io/hxaudiojs/example01.html">Multiple players, testing preload, loop &amp; autoplay attributes</a></li>
 </ul>
 
-<h3 id="toc_3">Browser &amp; format support</h3>
+<h3 id="toc_4">Browser &amp; format support</h3>
 
 <p>It has been verified to work across:</p>
 
@@ -80,17 +107,29 @@ But after a closer look it could use an update:</p>
 <li>Firefox</li>
 </ul>
 
-<h3 id="toc_4">Source code</h3>
+<h3 id="toc_5">Source code</h3>
 
 <p>All efforts have been made to keep the source as clean and readable as possible. Until we release more detailed documentation, the annotated source is the best reference for usage.</p>
 
-<p>Annotated source / Source on Github</p>
+<p><a href="https://github.com/MatthijsKamstra/hxaudiojs/blob/master/src/Main.hx">Annotated source</a> / <a href="http://matthijskamstra.github.io/hxaudiojs/">Source</a> on Github</p>
 
-<h3 id="toc_5">License</h3>
+<h3 id="toc_6">License</h3>
 
-<p>hxaudio.js is released under an MIT License, so do with it what you will.</p>
+<p>hxaudio.js is released under an <a href="https://github.com/MatthijsKamstra/hxaudiojs/blob/master/LICENSE">MIT License</a>, so do with it what you will.</p>
 
+<h3 id="toc_7">Build from source</h3>
 
+<p>Use NPM watch for automate build<br>
+<code>cd</code> to the correct folder </p>
+
+<pre><code class="language-none">npm install
+npm run watch</code></pre>
+
+<p>or just build it once with</p>
+
+<pre><code class="language-none">haxe javascript.hxml</code></pre>
+
+<p>And open <code>/bin/index.html</code> in your favorite browser. </p>
 
 
 
