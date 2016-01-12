@@ -94,6 +94,7 @@ HxAudio.prototype = {
 			played.innerHTML = (m < 10?"0":"") + m + ":" + (s < 10?"0":"") + s;
 			progress.style.width = 100 * percent1 + "%";
 			playhead.style.marginLeft = 100 * percent1 + "%";
+			if(audio.paused) btn.className = "play-pause play"; else btn.className = "play-pause pause";
 			_g.onTimeUpdate(e2);
 		};
 		audio.onended = function(e3) {
@@ -108,7 +109,6 @@ HxAudio.prototype = {
 			var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
 			var duration1 = audio.duration;
 			if(duration1 > 0) loaded.style.width = bufferedEnd / duration1 * 100 + "%";
-			if(audio.paused) btn.className = "play-pause play"; else btn.className = "play-pause pause";
 			_g.onProgress(e5);
 		};
 		audio.onerror = function(e6) {
