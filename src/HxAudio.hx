@@ -161,6 +161,12 @@ class HxAudio
 			progress.style.width = (100 *percent) + '%';
 			playhead.style.marginLeft = (100 *percent) + "%";
 
+			if(audio.paused){
+				btn.className = "play-pause play";
+			} else {
+				btn.className = "play-pause pause";
+			}
+
 			onTimeUpdate(e);
 		}
 
@@ -187,12 +193,6 @@ class HxAudio
 			
 			if (duration > 0) 
 				loaded.style.width = ((bufferedEnd / duration)*100) + "%";
-
-			if(audio.paused){
-				btn.className = "play-pause play";
-			} else {
-				btn.className = "play-pause pause";
-			}
 
 			onProgress(e);
 		}
