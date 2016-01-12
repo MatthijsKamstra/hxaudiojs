@@ -17,6 +17,7 @@
 		}
 		.container {
 			background-color: white;
+			position: relative;
 		}
 	</style>
 
@@ -28,10 +29,14 @@
 
 		<h1>HxAudio.js</h1>
 
-<!--
+
+		container has position: relative
+
 		<hr>
 
 		<h3>test player, css</h3>
+
+		<p>audio already wrapped with div class hxaudiojs </p>
 
 		<div class="hxaudiojs" classname="hxaudiojs" id="hxaudiojs000">
 
@@ -49,7 +54,7 @@
 			<div class="error-message"></div>
 		</div>
 
--->
+
 
 	</div>
 
@@ -76,8 +81,12 @@
 
 		<hr>
 
-		<p>Load local file</p>
+		<p>leftoffset</p>
+		<div style="position:absolute;right:0;">
+
 		<audio src="audio/01. Strobe - Radio Edit.mp3" preload="auto" ></audio>
+
+		</div>
 
 		<hr>
 
@@ -98,7 +107,9 @@
 
 	</div>
 
+<p>no leftoffset</p>
 
+<audio src="audio/01. Strobe - Radio Edit.mp3" preload="auto" ></audio>
 
 	<!-- Code generated using Haxe -->
 	<script type="text/javascript" src="hxaudiojs/hxaudio.js"></script>

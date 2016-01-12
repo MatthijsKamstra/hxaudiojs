@@ -6,6 +6,145 @@ function $extend(from, fields) {
 	if( fields.toString !== Object.prototype.toString ) proto.toString = fields.toString;
 	return proto;
 }
+var HxAudio = function() {
+	this.markup = "<div class=\"play-pause\"></div>\n\t\t<div class=\"scrubber\">\n\t\t\t<div class=\"playhead\"></div>\n\t\t\t<div class=\"progress\"></div>\n\t\t\t<div class=\"loaded\"></div>\n\t\t</div>\n\t\t<div class=\"time\">\n\t\t\t<em class=\"played\">00:00</em>/<strong class=\"duration\">00:00</strong>\n\t\t</div>";
+	this.css = "";
+	this.instanceCount = 0;
+	this.doc = window.document;
+	var _g = this;
+	this.css = haxe_Resource.getString("style");
+	this.doc.addEventListener("DOMContentLoaded",function(event) {
+		_g.injectCSS();
+		_g.wrapAudioTag();
+	});
+};
+HxAudio.__name__ = true;
+HxAudio.prototype = {
+	injectCSS: function() {
+		var head = this.doc.getElementsByTagName("head")[0];
+		var firstchild = head.firstChild;
+		var style = this.doc.createElement("style");
+		if(head == null) return;
+		style.setAttribute("type","text/css");
+		style.setAttribute("title","audiojs");
+		style.appendChild(this.doc.createTextNode(this.css));
+		head.insertBefore(style,firstchild);
+	}
+	,wrapAudioTag: function() {
+		var audioElements = this.doc.getElementsByTagName("audio");
+		var _g1 = 0;
+		var _g = audioElements.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this.createPlayer(js_Boot.__cast(audioElements[i] , HTMLAudioElement));
+		}
+	}
+	,createPlayer: function(audioElement) {
+		var id = "hxaudiojs" + this.instanceCount;
+		if(audioElement.hasAttribute("controls") != null) audioElement.removeAttribute("controls");
+		var iswrapper = false;
+		if(audioElement.parentElement.className == "hxaudiojs") {
+			id = audioElement.parentElement.id;
+			iswrapper = true;
+		}
+		if(!iswrapper) {
+			var wrapper = this.doc.createElement("div");
+			wrapper.setAttribute("class","hxaudiojs");
+			wrapper.setAttribute("className","hxaudiojs");
+			wrapper.setAttribute("id",id);
+			wrapper.innerHTML = audioElement.outerHTML + this.markup;
+			audioElement.outerHTML = wrapper.outerHTML;
+			this.instanceCount++;
+		}
+		this.init(id);
+	}
+	,init: function(id) {
+		var _g = this;
+		var wrapper = this.doc.getElementById(id);
+		if(wrapper.getElementsByTagName("audio")[0] == null) {
+			console.log("no <audio> tag in element $id");
+			return;
+		}
+		var audio;
+		audio = js_Boot.__cast(wrapper.getElementsByTagName("audio")[0] , HTMLAudioElement);
+		var btn = wrapper.getElementsByClassName("play-pause")[0];
+		var playhead = wrapper.getElementsByClassName("playhead")[0];
+		var progress = wrapper.getElementsByClassName("progress")[0];
+		var loaded = wrapper.getElementsByClassName("loaded")[0];
+		var duration = wrapper.getElementsByClassName("duration")[0];
+		var played = wrapper.getElementsByClassName("played")[0];
+		var scrubber = wrapper.getElementsByClassName("scrubber")[0];
+		btn.onclick = function(e) {
+			if(audio.paused) audio.play(); else audio.pause();
+		};
+		scrubber.onclick = function(e1) {
+			if(isNaN(audio.duration)) {
+				console.log("start loading data?");
+				return;
+			}
+			var relativeLeft = e1.clientX - _g.getLeftOffset(scrubber);
+			var percent = relativeLeft / scrubber.offsetWidth;
+			audio.currentTime = audio.duration * percent;
+		};
+		audio.ontimeupdate = function(e2) {
+			var percent1 = audio.currentTime / audio.duration;
+			var p = audio.duration * percent1;
+			var m = Math.floor(p / 60);
+			var s = Math.floor(p % 60);
+			played.innerHTML = (m < 10?"0":"") + m + ":" + (s < 10?"0":"") + s;
+			progress.style.width = 100 * percent1 + "%";
+			playhead.style.marginLeft = 100 * percent1 + "%";
+			_g.onTimeUpdate(e2);
+		};
+		audio.onended = function(e3) {
+			btn.className = "play-pause play";
+			_g.onEnded(e3);
+		};
+		audio.onloadstart = function(e4) {
+			_g.onLoadStart(e4);
+		};
+		audio.onprogress = function(e5) {
+			if(audio.buffered.length == 0) return;
+			var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
+			var duration1 = audio.duration;
+			if(duration1 > 0) loaded.style.width = bufferedEnd / duration1 * 100 + "%";
+			if(audio.paused) btn.className = "play-pause play"; else btn.className = "play-pause pause";
+			_g.onProgress(e5);
+		};
+		audio.onerror = function(e6) {
+			console.log("## debug");
+			btn.className = "play-pause error";
+			_g.onError(e6);
+		};
+		audio.onloadeddata = function(e7) {
+			var m1 = Math.floor(audio.duration / 60);
+			var s1 = Math.floor(audio.duration % 60);
+			duration.innerHTML = (m1 < 10?"0":"") + m1 + ":" + (s1 < 10?"0":"") + s1;
+			_g.onLoadedData(e7);
+		};
+	}
+	,getLeftOffset: function(el) {
+		var _leftOffset = 0;
+		do {
+			_leftOffset += el.offsetLeft;
+			el = el.offsetParent;
+		} while(el.offsetParent != null);
+		return _leftOffset;
+	}
+	,onTimeUpdate: function(e) {
+	}
+	,onEnded: function(e) {
+	}
+	,onLoadStart: function(e) {
+	}
+	,onProgress: function(e) {
+	}
+	,onError: function(e) {
+	}
+	,onLoadedData: function(e) {
+	}
+	,__class__: HxAudio
+};
 var HxOverrides = function() { };
 HxOverrides.__name__ = true;
 HxOverrides.cca = function(s,index) {
@@ -22,110 +161,10 @@ HxOverrides.substr = function(s,pos,len) {
 	} else if(len < 0) len = s.length + len - pos;
 	return s.substr(pos,len);
 };
-var Main = function() {
-	this.markup = "<div class=\"play-pause\"></div>\n\t\t<div class=\"scrubber\">\n\t\t\t<div class=\"playhead\"></div>\n\t\t\t<div class=\"progress\"></div>\n\t\t\t<div class=\"loaded\"></div>\n\t\t</div>\n\t\t<div class=\"time\">\n\t\t\t<em class=\"played\">00:00</em>/<strong class=\"duration\">00:00</strong>\n\t\t</div>";
-	this.css = "";
-	this.instanceCount = 0;
-	this.doc = window.document;
-	var _g = this;
-	this.css = haxe_Resource.getString("style");
-	this.doc.addEventListener("DOMContentLoaded",function(event) {
-		_g.injectCSS();
-		_g.init();
-	});
-};
+var Main = function() { };
 Main.__name__ = true;
 Main.main = function() {
-	var main = new Main();
-};
-Main.prototype = {
-	injectCSS: function() {
-		var head = this.doc.getElementsByTagName("head")[0];
-		var firstchild = head.firstChild;
-		var style = this.doc.createElement("style");
-		if(head == null) return;
-		style.setAttribute("type","text/css");
-		style.setAttribute("title","audiojs");
-		style.appendChild(this.doc.createTextNode(this.css));
-		head.insertBefore(style,firstchild);
-	}
-	,init: function() {
-		var audioElements = this.doc.getElementsByTagName("audio");
-		var _g1 = 0;
-		var _g = audioElements.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			this.createPlayer(js_Boot.__cast(audioElements[i] , HTMLAudioElement));
-		}
-	}
-	,initAudioPlayer: function(id) {
-		var wrapper = this.doc.getElementById(id);
-		var audio;
-		audio = js_Boot.__cast(wrapper.getElementsByTagName("audio")[0] , HTMLAudioElement);
-		var btn = wrapper.getElementsByClassName("play-pause")[0];
-		var playhead = wrapper.getElementsByClassName("playhead")[0];
-		var progress = wrapper.getElementsByClassName("progress")[0];
-		var loaded = wrapper.getElementsByClassName("loaded")[0];
-		var duration = wrapper.getElementsByClassName("duration")[0];
-		var played = wrapper.getElementsByClassName("played")[0];
-		var scrubber = wrapper.getElementsByClassName("scrubber")[0];
-		btn.onclick = function(e) {
-			if(audio.paused) {
-				btn.className = "play-pause pause";
-				audio.play();
-			} else {
-				btn.className = "play-pause play";
-				audio.pause();
-			}
-		};
-		scrubber.onclick = function(e1) {
-			var relativeLeft = e1.clientX - scrubber.offsetLeft;
-			var percent = relativeLeft / scrubber.offsetWidth;
-			audio.currentTime = audio.duration * percent;
-		};
-		audio.ontimeupdate = function(e2) {
-			var percent1 = audio.currentTime / audio.duration;
-			var p = audio.duration * percent1;
-			var m = Math.floor(p / 60);
-			var s = Math.floor(p % 60);
-			played.innerHTML = (m < 10?"0":"") + m + ":" + (s < 10?"0":"") + s;
-			progress.style.width = 100 * percent1 + "%";
-			playhead.style.marginLeft = 100 * percent1 + "%";
-		};
-		audio.onended = function(e3) {
-			btn.className = "play-pause play";
-		};
-		audio.onloadstart = function(e4) {
-		};
-		audio.onprogress = function(e5) {
-			if(audio.buffered.length == 0) return;
-			var bufferedEnd = audio.buffered.end(audio.buffered.length - 1);
-			var duration1 = audio.duration;
-			if(duration1 > 0) loaded.style.width = bufferedEnd / duration1 * 100 + "%";
-		};
-		audio.onerror = function(e6) {
-			console.log("## debug");
-			btn.className = "play-pause error";
-		};
-		audio.onloadeddata = function(e7) {
-			var m1 = Math.floor(audio.duration / 60);
-			var s1 = Math.floor(audio.duration % 60);
-			duration.innerHTML = (m1 < 10?"0":"") + m1 + ":" + (s1 < 10?"0":"") + s1;
-		};
-	}
-	,createPlayer: function(audioElement) {
-		var id = "hxaudiojs" + this.instanceCount;
-		if(audioElement.hasAttribute("controls") != null) audioElement.removeAttribute("controls");
-		var wrapper = this.doc.createElement("div");
-		wrapper.setAttribute("class","hxaudiojs");
-		wrapper.setAttribute("className","hxaudiojs");
-		wrapper.setAttribute("id",id);
-		wrapper.innerHTML = audioElement.outerHTML + this.markup;
-		audioElement.outerHTML = wrapper.outerHTML;
-		this.instanceCount++;
-		this.initAudioPlayer(id);
-	}
-	,__class__: Main
+	var hxaudiojs = new HxAudio();
 };
 Math.__name__ = true;
 var Std = function() { };
